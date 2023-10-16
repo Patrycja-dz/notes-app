@@ -1,76 +1,43 @@
-import { Notes } from "../interfaces/Note";
+import { Note } from "../interfaces/Note";
 import { useState } from "react";
 
 const Notes = () => {
-  const [notes, setNotes] = useState<Notes[]>([
+  const [notes, setNotes] = useState<Note[]>([
     {
       id: 1,
       title: "Eat dinner",
       priority: "None",
       content: "eat delicious dinner with family",
     },
-    ,
+
     {
       id: 2,
       title: "Sleep",
       priority: "High",
       content: "Sleep ...",
     },
+    {
+      id: 3,
+      title: "Shopping",
+      priority: "Medium",
+      content: "Butter,salad,water,bread ...",
+    },
   ]);
+
   return (
     <div className="notes-container">
-      <div className="note-item">
-        <div className="note-header">
-          <button className="note-remove">X</button>
-        </div>
-        <h2 className="note-heading">napisać email</h2>
+      {notes.map((note) => {
+        return (
+          <div className="note-item" key={note.id}>
+            <div className="note-header">
+              <button className="note-remove">X</button>
+            </div>
+            <h2 className="note-heading">{note.title}</h2>
 
-        <p className="note-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet minus
-          tenetur ut repellat adipisci ea voluptate reprehenderit sunt soluta,
-          sed laboriosam autem a architecto ullam nesciunt eum, inventore
-          doloribus tempora.
-        </p>
-      </div>
-      <div className="note-item">
-        <div className="note-header">
-          <button className="note-remove">X</button>
-        </div>
-        <h2 className="note-heading">napisać email</h2>
-
-        <p className="note-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet minus
-          tenetur ut repellat adipisci ea voluptate reprehenderit sunt soluta,
-          sed laboriosam autem a architecto ullam nesciunt eum, inventore
-          doloribus tempora.
-        </p>
-      </div>
-      <div className="note-item">
-        <div className="note-header">
-          <button className="note-remove">X</button>
-        </div>
-        <h2 className="note-heading">napisać email</h2>
-
-        <p className="note-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet minus
-          tenetur ut repellat adipisci ea voluptate reprehenderit sunt soluta,
-          sed laboriosam autem a architecto ullam nesciunt eum, inventore
-          doloribus tempora.
-        </p>
-      </div>
-      <div className="note-item">
-        <div className="note-header">
-          <button className="note-remove">X</button>
-        </div>
-        <h2 className="note-heading">napisać email</h2>
-
-        <p className="note-content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet minus
-          tenetur ut repellat adipisci ea voluptate reprehenderit sunt soluta,
-          sed laboriosam autem a architecto ullam nesciunt eum, inventore
-          doloribus tempora.
-        </p>
-      </div>
+            <p className="note-content">{note.content}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };
