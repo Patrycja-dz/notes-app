@@ -29,27 +29,14 @@ function App() {
   return (
     <main className="app">
       <Form
-        onNotesSubmit={(title, content, priority) => {
-          // setNotes((prevNotes) => {
-          //   return [
-          //     {
-          //       title,
-          //       content,
-          //       priority,
-          //       id: prevNotes.length + 1,
-          //     },
-          //     ...prevNotes,
-          //   ];
-          // });
+        onNotesSubmit={(notes) => {
           setNotes((prevNotes) => {
-            return [
-              { title, content, id: prevNotes.length + 1, priority },
-              ...prevNotes,
-            ];
+            return [...prevNotes, notes];
           });
         }}
+        notes={notes}
       />
-      <Notes notes={notes} />
+      <Notes notes={notes} setNotes={setNotes} />
     </main>
   );
 }

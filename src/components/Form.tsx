@@ -1,19 +1,32 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-const Form = ({ onNotesSubmit }) => {
+const Form = ({ onNotesSubmit, notes }) => {
   const [noteTitle, setNoteTitle] = useState("");
   const [noteContent, setNoteContent] = useState("");
   const [notePriority, setNotePriority] = useState("");
-  function handleSubmit(event) {
+
+  function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
     const title = noteTitle;
     const content = noteContent;
     const priority = notePriority;
-    onNotesSubmit({ title, content, priority });
+    const id = new Date().valueOf();
+    const newNotes = { title, content, priority, id };
+    onNotesSubmit(newNotes);
+    clearInputsAfterSubmission();
   }
+
+  const clearInputsAfterSubmission = () => {
+    setNoteTitle("");
+    setNoteContent("");
+    setNotePriority("");
+  };
+
   return (
     <div className="form-wrapper">
+      <h1>To do</h1>
+      <p>{notes.length}</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

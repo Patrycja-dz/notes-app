@@ -1,8 +1,10 @@
-const Note = ({ title, text, id, priority }) => {
+const Note = ({ title, text, priority, id, onDeleteButtonClick }) => {
   return (
-    <div className="note-item" id={id}>
+    <div className="note-item" key={id}>
       <div className="note-header">
-        <button className="note-remove">X</button>
+        <button className="note-remove" onClick={onDeleteButtonClick}>
+          X
+        </button>
       </div>
       <h2 className="note-heading">{title}</h2>
 

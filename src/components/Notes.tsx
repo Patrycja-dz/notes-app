@@ -1,7 +1,18 @@
 import Note from "./Note";
-const Notes = ({ notes }) => {
+const Notes = ({ notes, setNotes }) => {
+  const deletNote = (id) => {
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+  };
+
   const notesElement = notes.map((n) => (
-    <Note title={n.title} text={n.content} id={n.id} priority={n.priority} />
+    <Note
+      onDeleteButtonClick={() => deletNote(n.id)}
+      title={n.title}
+      text={n.content}
+      priority={n.priority}
+      key={n.id}
+      id={n.id}
+    />
   ));
   return <div className="notes-container">{notesElement}</div>;
 };
