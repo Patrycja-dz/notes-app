@@ -1,13 +1,6 @@
-const Note = ({
-  title,
-  text,
-  priority,
-  id,
-  onDeleteButtonClick,
-  onEditClick,
-}) => {
+const Note = ({ title, text, priority, id, onDeleteButtonClick }) => {
   return (
-    <div className="note-item" key={id} onClick={onEditClick}>
+    <div className="note-item" key={id}>
       <div className="note-header">
         <button className="note-remove" onClick={onDeleteButtonClick}>
           X
