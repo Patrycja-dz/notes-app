@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 
-const Form = ({ onNotesSubmit, notes }) => {
+const Form = ({ onNotesSubmit, notes, onNotesEdit, selectedNote }) => {
   const [noteTitle, setNoteTitle] = useState("");
   const [noteContent, setNoteContent] = useState("");
   const [notePriority, setNotePriority] = useState("");
-
+  // const noteExample = {
+  //   noteTitle: "",
+  //   noteContent: "",
+  //   notePriority: "",
+  // };
+  const title = noteTitle;
+  const content = noteContent;
+  const priority = notePriority;
+  const id = new Date().valueOf();
+  const newNotes = { title, content, priority, id };
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    const title = noteTitle;
-    const content = noteContent;
-    const priority = notePriority;
-    const id = new Date().valueOf();
-    const newNotes = { title, content, priority, id };
     onNotesSubmit(newNotes);
     clearInputsAfterSubmission();
   }
@@ -22,24 +26,41 @@ const Form = ({ onNotesSubmit, notes }) => {
     setNoteContent("");
     setNotePriority("");
   };
+  const handleEditClick = (e) => {
+    onNotesEdit(
+      {
+        ...notes,
+        content: e.target.value,
+        title: e.target.value,
+        priority: e.target.value,
+      },
+      console.log(content)
+    );
+  };
+  const cancel = () => {
+    console.log("cancel");
+    // setNoteTitle("");
+    // setNoteContent("");
+    // setNotePriority("");
+  };
 
   return (
     <div className="form-wrapper">
-      <h1>To do</h1>
-      <p>{notes.length}</p>
+      {/* <h1>To do</h1>
+      <p>{notes.length}</p> */}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Title"
           required
-          value={noteTitle}
+          value={selectedNote ? selectedNote.title : noteTitle}
           onChange={(e) => {
             setNoteTitle(e.target.value);
           }}
         />
         <select
           placeholder="Add priprity"
-          value={notePriority}
+          value={selectedNote ? selectedNote.priority : notePriority}
           onChange={(e) => {
             setNotePriority(e.target.value);
           }}
@@ -56,13 +77,23 @@ const Form = ({ onNotesSubmit, notes }) => {
           required
           rows={20}
           className="note-content"
-          value={noteContent}
+          value={selectedNote ? selectedNote.content : noteContent}
           onChange={(e) => {
             setNoteContent(e.target?.value);
           }}
         />
-        <button type="submit">Add note</button>
+
+        {/* <button onClick={handleEditClick}>Edit</button> */}
       </form>
+      {selectedNote ? (
+        <button type="button" onClick={handleEditClick}>
+          Save
+        </button>
+      ) : (
+        <button type="submit">Add note</button>
+      )}
+
+      {selectedNote && <button onClick={cancel}>Cancel</button>}
     </div>
   );
 };

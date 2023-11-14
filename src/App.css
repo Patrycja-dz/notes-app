@@ -33,7 +33,7 @@
 .note-item {
   border: 2px solid #ddd;
   padding: 1rem;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   justify-content: center;
 }

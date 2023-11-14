@@ -1,6 +1,13 @@
-const Note = ({ title, text, priority, id, onDeleteButtonClick }) => {
+const Note = ({
+  title,
+  text,
+  priority,
+  id,
+  onDeleteButtonClick,
+  onEditClick,
+}) => {
   return (
-    <div className="note-item" key={id}>
+    <div className="note-item" key={id} onClick={onEditClick}>
       <div className="note-header">
         <button className="note-remove" onClick={onDeleteButtonClick}>
           X
@@ -10,6 +17,7 @@ const Note = ({ title, text, priority, id, onDeleteButtonClick }) => {
 
       <p className="note-content">{text}</p>
       <p>{priority}</p>
+      <button onClick={onEditClick}>Edit</button>
     </div>
   );
 };
