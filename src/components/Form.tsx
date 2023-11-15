@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Form = ({ onNotesSubmit, notes }) => {
+const Form = ({ onNotesSubmit, onClose }) => {
   const [noteTitle, setNoteTitle] = useState("");
   const [noteContent, setNoteContent] = useState("");
   const [notePriority, setNotePriority] = useState("");
@@ -15,6 +15,7 @@ const Form = ({ onNotesSubmit, notes }) => {
     const newNotes = { title, content, priority, id };
     onNotesSubmit(newNotes);
     clearInputsAfterSubmission();
+    onClose();
   }
 
   const clearInputsAfterSubmission = () => {
@@ -25,9 +26,11 @@ const Form = ({ onNotesSubmit, notes }) => {
 
   return (
     <div className="form-wrapper">
-      {/* <h1>To do</h1>
-      <p>{notes.length}</p> */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form">
+        <button onClick={onClose} className="test">
+          X
+        </button>
+
         <input
           type="text"
           placeholder="Title"
@@ -36,6 +39,7 @@ const Form = ({ onNotesSubmit, notes }) => {
           onChange={(e) => {
             setNoteTitle(e.target.value);
           }}
+          className="form-field"
         />
         <select
           placeholder="Add priprity"
@@ -43,25 +47,28 @@ const Form = ({ onNotesSubmit, notes }) => {
           onChange={(e) => {
             setNotePriority(e.target.value);
           }}
+          className="form-field"
         >
           <option value="">-- Add priority --</option>
-          <option value="urgent">Urgent</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-          <option value="none">None</option>
+          <option value="Urgent">Urgent</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+          <option value="None">None</option>
         </select>
         <textarea
           placeholder="Note content"
           required
           rows={20}
-          className="note-content"
+          className="note-content  form-field"
           value={noteContent}
           onChange={(e) => {
             setNoteContent(e.target?.value);
           }}
         />
-        <button type="submit">Add note</button>
+        <button type="submit" className="btn">
+          Add note
+        </button>
       </form>
     </div>
   );

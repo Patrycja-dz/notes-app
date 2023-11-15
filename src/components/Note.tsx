@@ -1,7 +1,8 @@
 const Note = ({ title, text, priority, id, onDeleteButtonClick }) => {
   return (
-    <div className="note-item" key={id}>
+    <div className="cuttoff-text" key={id}>
       <div className="note-header">
+        <p>{priority}</p>
         <button className="note-remove" onClick={onDeleteButtonClick}>
           X
         </button>
@@ -9,8 +10,9 @@ const Note = ({ title, text, priority, id, onDeleteButtonClick }) => {
       <h2 className="note-heading">{title}</h2>
 
       <p className="note-content">{text}</p>
-      <p>{priority}</p>
-      <button onClick={onEditClick}>Edit</button>
+
+      {/* <button onClick={onEditClick}>Edit</button> */}
+      <input type="checkbox" className="expand-note" />
     </div>
   );
 };
