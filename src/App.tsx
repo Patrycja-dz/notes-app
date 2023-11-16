@@ -23,7 +23,7 @@ function App() {
       title: "Shopping",
       priority: "Medium",
       content:
-        "Croissant gummi bears halvah bear claw liquorice cookie apple pie fruitcake. Candy gummies liquorice gingerbread tart danish. Candy sweet roll lemon drops gummi bears sugar plum. Chupa chups oat cake carrot cake gummi bears soufflé bear claw caramels. Cake powder chocolate cake chupa chups caramels. Sweet roll apple pie dragée chocolate bar tiramisu pudding. Toffee cupcake apple pie cake ice cream apple pie. Gummies gingerbread bear claw chupa chups jujubes jelly-o. Lemon drops sweet roll macaroon muffin croissant candy canes brownie. Dragée chupa chups cupcake fruitcake gummies soufflé tiramisu tart ice cream. Candy canes croissant sesame snaps lemon drops sugar plum jelly-o. Ice cream tart cookie muffin cake macaroon pie gummi bears jujubes. Oat cake sugar plum sweet roll sweet caramels chocolate bar gummies tiramisu. Dessert jelly pudding caramels fruitcake wafer apple pie sugar plum sweet.",
+        "Croissant gummi bears halvah bear claw liquorice cookie apple pie fruitcake.",
     },
   ];
   const [notes, setNotes] = useState<NoteRecord[]>(initialValues);

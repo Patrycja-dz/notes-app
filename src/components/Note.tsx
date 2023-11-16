@@ -12,7 +12,7 @@ const Note = ({ title, text, priority, id, onDeleteButtonClick }) => {
       <p className="note-content">{text}</p>
 
       {/* <button onClick={onEditClick}>Edit</button> */}
-      <input type="checkbox" className="expand-note" />
+      {/* <input type="checkbox" className="expand-note" /> */}
     </div>
   );
 };
