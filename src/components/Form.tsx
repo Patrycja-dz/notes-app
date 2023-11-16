@@ -1,24 +1,21 @@
 import React, { useState } from "react";
 
-const Form = ({ onNotesSubmit, notes, onNotesEdit, selectedNote }) => {
+const Form = ({ onNotesSubmit, onClose }) => {
   const [noteTitle, setNoteTitle] = useState("");
   const [noteContent, setNoteContent] = useState("");
   const [notePriority, setNotePriority] = useState("");
-  // const noteExample = {
-  //   noteTitle: "",
-  //   noteContent: "",
-  //   notePriority: "",
-  // };
-  const title = noteTitle;
-  const content = noteContent;
-  const priority = notePriority;
-  const id = new Date().valueOf();
-  const newNotes = { title, content, priority, id };
+
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
+    const title = noteTitle;
+    const content = noteContent;
+    const priority = notePriority;
+    const id = new Date().valueOf();
+    const newNotes = { title, content, priority, id };
     onNotesSubmit(newNotes);
     clearInputsAfterSubmission();
+    onClose();
   }
 
   const clearInputsAfterSubmission = () => {
@@ -26,74 +23,53 @@ const Form = ({ onNotesSubmit, notes, onNotesEdit, selectedNote }) => {
     setNoteContent("");
     setNotePriority("");
   };
-  const handleEditClick = (e) => {
-    onNotesEdit(
-      {
-        ...notes,
-        content: e.target.value,
-        title: e.target.value,
-        priority: e.target.value,
-      },
-      console.log(content)
-    );
-  };
-  const cancel = () => {
-    console.log("cancel");
-    // setNoteTitle("");
-    // setNoteContent("");
-    // setNotePriority("");
-  };
 
   return (
     <div className="form-wrapper">
-      {/* <h1>To do</h1>
-      <p>{notes.length}</p> */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form">
+        <button onClick={onClose} className="test">
+          X
+        </button>
+
         <input
           type="text"
           placeholder="Title"
           required
-          value={selectedNote ? selectedNote.title : noteTitle}
+          value={noteTitle}
           onChange={(e) => {
             setNoteTitle(e.target.value);
           }}
+          className="form-field"
         />
         <select
           placeholder="Add priprity"
-          value={selectedNote ? selectedNote.priority : notePriority}
+          value={notePriority}
           onChange={(e) => {
             setNotePriority(e.target.value);
           }}
+          className="form-field"
         >
           <option value="">-- Add priority --</option>
-          <option value="urgent">Urgent</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-          <option value="none">None</option>
+          <option value="Urgent">Urgent</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+          <option value="None">None</option>
         </select>
         <textarea
           placeholder="Note content"
           required
           rows={20}
-          className="note-content"
-          value={selectedNote ? selectedNote.content : noteContent}
+          className="note-content  form-field"
+          value={noteContent}
           onChange={(e) => {
             setNoteContent(e.target?.value);
           }}
         />
-
-        {/* <button onClick={handleEditClick}>Edit</button> */}
-      </form>
-      {selectedNote ? (
-        <button type="button" onClick={handleEditClick}>
-          Save
+        <button type="submit" className="btn">
+          Add note
         </button>
-      ) : (
-        <button type="submit">Add note</button>
-      )}
-
-      {selectedNote && <button onClick={cancel}>Cancel</button>}
+      </form>
     </div>
   );
 };
