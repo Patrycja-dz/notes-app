@@ -8,11 +8,11 @@ const Form = ({ onNotesSubmit, onClose }) => {
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    const title = noteTitle;
-    const content = noteContent;
-    const priority = notePriority;
+    // const title = noteTitle;
+    // const content = noteContent;
+    // const priority = notePriority;
     const id = new Date().valueOf();
-    const newNotes = { title, content, priority, id };
+    const newNotes = { noteTitle, noteContent, notePriority, id };
     onNotesSubmit(newNotes);
     clearInputsAfterSubmission();
     onClose();
