@@ -1,17 +1,15 @@
+import { useNoteContextHook } from "../context/note-context";
 import Note from "./Note";
-const Notes = ({ notes, setNotes, showModal }) => {
-  const deletNote = (id) => {
-    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
-  };
+const Notes = ({ notes }) => {
+  const { showModal } = useNoteContextHook();
 
   const notesElement = notes.map(
     (n) =>
       !showModal && (
         <Note
-          onDeleteButtonClick={() => deletNote(n.id)}
-          title={n.title}
-          text={n.content}
-          priority={n.priority}
+          title={n.noteTitle}
+          text={n.noteContent}
+          priority={n.notePriority}
           key={n.id}
           id={n.id}
         />
