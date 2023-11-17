@@ -6,9 +6,21 @@ export const NoteAppContext = createContext<NoteContext | null>(null);
 export default function NoteContextProvider({
   children,
 }: NoteContextProviderProps) {
-  const [notes, setNotes] = useState<Note[]>(initialValues);
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  const [editNote, setEditNote] = useState(false);
+  // const [notesData, setNotesData] = useState<Note>(initialState);
   return (
-    <NoteAppContext.Provider value={{ notes, setNotes }}>
+    <NoteAppContext.Provider
+      value={{
+        notes,
+        setNotes,
+        showModal,
+        setShowModal,
+        setEditNote,
+        editNote,
+      }}
+    >
       {children}
     </NoteAppContext.Provider>
   );
