@@ -1,17 +1,18 @@
 import { useNoteContextHook } from "../context/note-context";
 import Note from "./Note";
-const Notes = ({ notes }) => {
-  const { showModal } = useNoteContextHook();
-
+const Notes = () => {
+  const { showModal, notes } = useNoteContextHook();
+  console.log(notes);
   const notesElement = notes.map(
     (n) =>
       !showModal && (
         <Note
-          title={n.noteTitle}
-          text={n.noteContent}
-          priority={n.notePriority}
+          title={n.title}
+          text={n.content}
+          // priority={n.notePriority}
           key={n.id}
           id={n.id}
+          note={n}
         />
       )
   );
