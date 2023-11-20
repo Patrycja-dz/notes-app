@@ -6,10 +6,24 @@ export const NoteAppContext = createContext<NoteContext | null>(null);
 export default function NoteContextProvider({
   children,
 }: NoteContextProviderProps) {
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<Note[] | void[]>(initialValues);
   const [showModal, setShowModal] = useState(false);
-  const [editNote, setEditNote] = useState(false);
-  // const [notesData, setNotesData] = useState<Note>(initialState);
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+  const [title, setNoteTitle] = useState("");
+  const [content, setNoteContent] = useState("");
+
+  const addNewNote = (note) => {
+    console.log(notes);
+    setNotes([...notes, note]);
+    console.log(notes);
+  };
+  const handleNoteClick = (note: Note) => {
+    setShowModal(true);
+    setSelectedNote(note);
+    setNoteTitle(note.title);
+    setNoteContent(note.content);
+  };
+
   return (
     <NoteAppContext.Provider
       value={{
@@ -17,8 +31,14 @@ export default function NoteContextProvider({
         setNotes,
         showModal,
         setShowModal,
-        setEditNote,
-        editNote,
+        addNewNote,
+        handleNoteClick,
+        selectedNote,
+        setSelectedNote,
+        content,
+        setNoteContent,
+        title,
+        setNoteTitle,
       }}
     >
       {children}

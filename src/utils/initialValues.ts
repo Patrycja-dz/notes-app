@@ -1,28 +1,32 @@
 export const initialValues = [
   {
     id: 1,
-    noteTitle: "Eat dinner",
-    notePriority: "None",
-    noteContent: "eat delicious dinner with family",
+    title: "test note 1",
+    content: "bla bla note1",
   },
-
   {
     id: 2,
-    noteTitle: "Sleep",
-    notePriority: "High",
-    noteContent: "Sleep ...",
+    title: "test note 2 ",
+    content: "bla bla note2",
   },
   {
     id: 3,
-    noteTitle: "Shopping",
-    notePriority: "Medium",
-    noteContent:
-      "Croissant gummi bears halvah bear claw liquorice cookie apple pie fruitcake.",
+    title: "test note 3",
+    content: "bla bla note3",
+  },
+  {
+    id: 4,
+    title: "test note 4 ",
+    content: "bla bla note4",
+  },
+  {
+    id: 5,
+    title: "test note 5",
+    content: "bla bla note5",
+  },
+  {
+    id: 6,
+    title: "test note 6",
+    content: "bla bla note6",
   },
 ];
-export const initialState = {
-  noteTitle: "",
-  notePriority: "",
-  noteContent: "",
-  id: new Date().valueOf(),
-};
