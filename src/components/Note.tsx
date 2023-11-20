@@ -1,21 +1,17 @@
 import { useNoteContextHook } from "../context/note-context";
 
-const Note = ({ title, text, priority, id }) => {
-  const { setNotes, setShowModal } = useNoteContextHook();
+const Note = ({ title, text, id, note }) => {
+  const { setNotes, handleNoteClick } = useNoteContextHook();
 
-  const handleEditNoteClick = () => {
-    console.log("tets", id);
-    setShowModal(true);
-  };
-
-  const deletNote = (id) => {
+  const deleteNote = (id) => {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   };
+
   return (
     <div className="cuttoff-text" key={id}>
       <div className="note-header">
-        <p>{priority}</p>
-        <button className="note-remove" onClick={() => deletNote(id)}>
+        {/* <p>{priority}</p> */}
+        <button className="note-remove" onClick={() => deleteNote(id)}>
           X
         </button>
       </div>
@@ -23,8 +19,7 @@ const Note = ({ title, text, priority, id }) => {
 
       <p className="note-content">{text}</p>
 
-      <button onClick={() => handleEditNoteClick()}>Edit</button>
-      {/* <input type="checkbox" className="expand-note" /> */}
+      <button onClick={() => handleNoteClick(note)}>Edit</button>
     </div>
   );
 };
