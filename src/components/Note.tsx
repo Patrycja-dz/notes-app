@@ -1,6 +1,6 @@
 import { useNoteContextHook } from "../context/note-context";
 
-const Note = ({ title, text, id, note }) => {
+const Note = ({ title, text, id, note, priority }) => {
   const { setNotes, handleNoteClick } = useNoteContextHook();
 
   const deleteNote = (id) => {
@@ -10,7 +10,7 @@ const Note = ({ title, text, id, note }) => {
   return (
     <div className="cuttoff-text" key={id}>
       <div className="note-header">
-        {/* <p>{priority}</p> */}
+        <p>{priority}</p>
         <button className="note-remove" onClick={() => deleteNote(id)}>
           X
         </button>

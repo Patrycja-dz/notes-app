@@ -84,7 +84,7 @@ const Form = ({ onClose }) => {
         }
         className="form"
       >
-        <button onClick={onClose} className="test">
+        <button onClick={onClose} className="close-form">
           X
         </button>
 
@@ -119,14 +119,15 @@ const Form = ({ onClose }) => {
           className="note-content  form-field"
           value={content}
           onChange={handleNoteContentChange}
+          maxLength={150}
         />
         {selectedNote ? (
-          <div>
+          <div className="form-btn-wrapper">
             <button type="submit">Edit note</button>
             <button onClick={() => handleCancel}>Cancel</button>
           </div>
         ) : (
-          <button type="submit" className="btn">
+          <button type="submit" className="submit-btn ">
             Add note
           </button>
         )}
