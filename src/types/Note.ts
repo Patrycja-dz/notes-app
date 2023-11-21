@@ -1,7 +1,7 @@
 export type Note = {
   id?: number;
   title: string;
-  // notePriority: string;
+  priority: string;
   content: string;
 };
 export type NoteContextProviderProps = {
@@ -12,8 +12,6 @@ export type NoteContext = {
   setNotes: React.Dispatch<React.SetStateAction<Note[] | void[]>>;
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  // editNote: boolean;
-  // setEditNote: React.Dispatch<React.SetStateAction<boolean>>;
   addNewNote: (note: Note) => void;
   selectedNote: Note | null;
   setSelectedNote: React.Dispatch<React.SetStateAction<Note | null>>;
@@ -22,4 +20,6 @@ export type NoteContext = {
   setNoteTitle: React.Dispatch<React.SetStateAction<string>>;
   content: string;
   setNoteContent: React.Dispatch<React.SetStateAction<string>>;
+  priority: string;
+  setPriority: React.Dispatch<React.SetStateAction<string>>;
 };

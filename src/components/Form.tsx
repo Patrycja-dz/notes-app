@@ -2,9 +2,6 @@ import { useNoteContextHook } from "../context/note-context";
 import { Note } from "../types/Note";
 
 const Form = ({ onClose }) => {
-  // const [title, setNoteTitle] = useState("");
-  // const [content, setNoteContent] = useState("");
-  // const [notePriority, setNotePriority] = useState("");
   const {
     addNewNote,
     notes,
@@ -17,12 +14,16 @@ const Form = ({ onClose }) => {
     setNoteTitle,
     title,
     content,
+    priority,
+    setPriority,
   } = useNoteContextHook();
+
   const id = new Date().valueOf();
+
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    addNewNote({ title, content, id });
+    addNewNote({ title, content, id, priority });
     setSelectedNote(null);
     clearInputsAfterSubmission();
     onClose();
@@ -31,7 +32,7 @@ const Form = ({ onClose }) => {
   const clearInputsAfterSubmission = () => {
     setNoteTitle("");
     setNoteContent("");
-    // setNotePriority("");
+    setPriority("");
   };
 
   const handleUpdateNote = (e: React.FormEvent) => {
@@ -41,6 +42,7 @@ const Form = ({ onClose }) => {
       id: selectedNote.id,
       title: title,
       content: content,
+      priority: priority,
     };
 
     const updateNotesList = notes.map((note) =>
@@ -55,9 +57,25 @@ const Form = ({ onClose }) => {
   const handleCancel = () => {
     setNoteTitle("");
     setNoteContent("");
+    setPriority("");
     setSelectedNote(null);
   };
 
+  const handleNoteTitleChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setNoteTitle(e.target.value);
+  };
+  const handleNoteContentChange = (
+    e: React.DetailedHTMLProps<
+      React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+      | HTMLTextAreaElement
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEventHandler<HTMLTextAreaElement>
+    >
+  ): void => {
+    setNoteContent(e?.target.value);
+  };
   return (
     <div className="form-wrapper">
       <form
@@ -75,18 +93,17 @@ const Form = ({ onClose }) => {
           placeholder="Title"
           required
           value={title}
-          onChange={(e) => {
-            setNoteTitle(e.target.value);
-          }}
+          onChange={handleNoteTitleChange}
           className="form-field"
         />
-        {/* <select
+        <select
           placeholder="Add priprity"
-          value={notePriority}
+          value={priority}
           onChange={(e) => {
-            setNotePriority(e.target.value);
+            setPriority(e.target.value);
           }}
           className="form-field selected"
+          defaultValue="Low"
         >
           <option value="">-- Add priority --</option>
           <option value="Urgent">Urgent</option>
@@ -94,16 +111,14 @@ const Form = ({ onClose }) => {
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
           <option value="None">None</option>
-        </select> */}
+        </select>
         <textarea
           placeholder="Note content"
           required
           rows={20}
           className="note-content  form-field"
           value={content}
-          onChange={(e) => {
-            setNoteContent(e.target.value);
-          }}
+          onChange={handleNoteContentChange}
         />
         {selectedNote ? (
           <div>

@@ -11,16 +11,17 @@ export default function NoteContextProvider({
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const [title, setNoteTitle] = useState("");
   const [content, setNoteContent] = useState("");
+  const [priority, setPriority] = useState("");
 
   const addNewNote = (note) => {
-    console.log(notes);
-    setNotes([...notes, note]);
-    console.log(notes);
+    setNotes((prevState) => [...prevState, note]);
   };
+
   const handleNoteClick = (note: Note) => {
     setShowModal(true);
     setSelectedNote(note);
     setNoteTitle(note.title);
+    setPriority(note.priority);
     setNoteContent(note.content);
   };
 
@@ -39,6 +40,8 @@ export default function NoteContextProvider({
         setNoteContent,
         title,
         setNoteTitle,
+        priority,
+        setPriority,
       }}
     >
       {children}
