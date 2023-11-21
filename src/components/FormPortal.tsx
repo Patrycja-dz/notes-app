@@ -1,8 +1,8 @@
-// import { useState } from "react";
 import { createPortal } from "react-dom";
+import { useNoteContextHook } from "../context/note-context";
 import Form from "./Form";
-const FormPortal = ({ onNotesSubmit, setShowModal, showModal }) => {
-  //   const [showModal, setShowModal] = useState(false);
+const FormPortal = () => {
+  const { showModal, setShowModal } = useNoteContextHook();
   return (
     <>
       {!showModal && (
@@ -10,10 +10,7 @@ const FormPortal = ({ onNotesSubmit, setShowModal, showModal }) => {
       )}
       {showModal &&
         createPortal(
-          <Form
-            onNotesSubmit={onNotesSubmit}
-            onClose={() => setShowModal(false)}
-          />,
+          <Form onClose={() => setShowModal(false)} />,
           document.body
         )}
     </>

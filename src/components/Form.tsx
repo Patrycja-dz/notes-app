@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import { useNoteContextHook } from "../context/note-context";
+import { Note } from "../types/Note";
 
-const Form = ({ onNotesSubmit, onClose }) => {
-  const [noteTitle, setNoteTitle] = useState("");
-  const [noteContent, setNoteContent] = useState("");
-  const [notePriority, setNotePriority] = useState("");
+const Form = ({ onClose }) => {
+  const {
+    addNewNote,
+    notes,
+    setNotes,
+    setShowModal,
+
+    selectedNote,
+    setSelectedNote,
+    setNoteContent,
+    setNoteTitle,
+    title,
+    content,
+    priority,
+    setPriority,
+  } = useNoteContextHook();
+
+  const id = new Date().valueOf();
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    const title = noteTitle;
-    const content = noteContent;
-    const priority = notePriority;
-    const id = new Date().valueOf();
-    const newNotes = { title, content, priority, id };
-    onNotesSubmit(newNotes);
+    addNewNote({ title, content, id, priority });
+    setSelectedNote(null);
     clearInputsAfterSubmission();
     onClose();
   }
@@ -21,13 +32,59 @@ const Form = ({ onNotesSubmit, onClose }) => {
   const clearInputsAfterSubmission = () => {
     setNoteTitle("");
     setNoteContent("");
-    setNotePriority("");
+    setPriority("");
   };
 
+  const handleUpdateNote = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedNote) return;
+    const updateNote: Note = {
+      id: selectedNote.id,
+      title: title,
+      content: content,
+      priority: priority,
+    };
+
+    const updateNotesList = notes.map((note) =>
+      note.id === selectedNote.id ? updateNote : note
+    );
+
+    setNotes(updateNotesList);
+    clearInputsAfterSubmission();
+    setSelectedNote(null);
+    setShowModal(false);
+  };
+  const handleCancel = () => {
+    setNoteTitle("");
+    setNoteContent("");
+    setPriority("");
+    setSelectedNote(null);
+  };
+
+  const handleNoteTitleChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setNoteTitle(e.target.value);
+  };
+  const handleNoteContentChange = (
+    e: React.DetailedHTMLProps<
+      React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+      | HTMLTextAreaElement
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEventHandler<HTMLTextAreaElement>
+    >
+  ): void => {
+    setNoteContent(e?.target.value);
+  };
   return (
     <div className="form-wrapper">
-      <form onSubmit={handleSubmit} className="form">
-        <button onClick={onClose} className="test">
+      <form
+        onSubmit={(event) =>
+          selectedNote ? handleUpdateNote(event) : handleSubmit(event)
+        }
+        className="form"
+      >
+        <button onClick={onClose} className="close-form">
           X
         </button>
 
@@ -35,19 +92,18 @@ const Form = ({ onNotesSubmit, onClose }) => {
           type="text"
           placeholder="Title"
           required
-          value={noteTitle}
-          onChange={(e) => {
-            setNoteTitle(e.target.value);
-          }}
+          value={title}
+          onChange={handleNoteTitleChange}
           className="form-field"
         />
         <select
           placeholder="Add priprity"
-          value={notePriority}
+          value={priority}
           onChange={(e) => {
-            setNotePriority(e.target.value);
+            setPriority(e.target.value);
           }}
-          className="form-field"
+          className="form-field selected"
+          defaultValue="Low"
         >
           <option value="">-- Add priority --</option>
           <option value="Urgent">Urgent</option>
@@ -61,14 +117,20 @@ const Form = ({ onNotesSubmit, onClose }) => {
           required
           rows={20}
           className="note-content  form-field"
-          value={noteContent}
-          onChange={(e) => {
-            setNoteContent(e.target?.value);
-          }}
+          value={content}
+          onChange={handleNoteContentChange}
+          maxLength={150}
         />
-        <button type="submit" className="btn">
-          Add note
-        </button>
+        {selectedNote ? (
+          <div className="form-btn-wrapper">
+            <button type="submit">Edit note</button>
+            <button onClick={() => handleCancel}>Cancel</button>
+          </div>
+        ) : (
+          <button type="submit" className="submit-btn ">
+            Add note
+          </button>
+        )}
       </form>
     </div>
   );

@@ -1,22 +1,38 @@
 export const initialValues = [
   {
     id: 1,
-    title: "Eat dinner",
-    priority: "None",
-    content: "eat delicious dinner with family",
+    title: "test note 1",
+    content: "bla bla note1",
+    priority: "high",
   },
-
   {
     id: 2,
-    title: "Sleep",
-    priority: "High",
-    content: "Sleep ...",
+    title: "test note 2 ",
+    content: "bla bla note2",
+    priority: "high",
   },
   {
     id: 3,
-    title: "Shopping",
-    priority: "Medium",
-    content:
-      "Croissant gummi bears halvah bear claw liquorice cookie apple pie fruitcake.",
+    title: "test note 3",
+    content: "bla bla note3",
+    priority: "high",
+  },
+  {
+    id: 4,
+    title: "test note 4 ",
+    content: "bla bla note4",
+    priority: "high",
+  },
+  {
+    id: 5,
+    title: "test note 5",
+    content: "bla bla note5",
+    priority: "high",
+  },
+  {
+    id: 6,
+    title: "test note 6",
+    content: "bla bla note6",
+    priority: "high",
   },
 ];
