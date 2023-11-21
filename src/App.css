@@ -53,6 +53,9 @@ body {
   place-self: center;
   margin-block: 10px;
 }
+.edit-button {
+  margin: 0.45rem auto;
+}
 .notes-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));

@@ -19,7 +19,9 @@ const Note = ({ title, text, id, note, priority }) => {
 
       <p className="note-content">{text}</p>
 
-      <button onClick={() => handleNoteClick(note)}>Edit</button>
+      <button onClick={() => handleNoteClick(note)} className="edit-button">
+        Edit
+      </button>
     </div>
   );
 };
